@@ -1,0 +1,105 @@
+<!-- Hero Section -->
+<section class="bg-dark text-white py-5 text-center">
+  <div class="container">
+    <h1 class="display-4 fw-bold mb-4">Welcome to MovieMind</h1>
+    <p class="lead mb-4">
+      Get personalized movie recommendations powered by Gemini AI. Tell us your
+      movie preferences, and we'll suggest your next favorite film!
+    </p>
+
+    <!-- Message display -->
+    <% if (typeof message !== 'undefined' && message) { %>
+    <div class="alert alert-info mt-3"><%= message %></div>
+    <% } %>
+  </div>
+</section>
+
+<!-- Recommendation Form Section -->
+<section class="my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Get Personalized Recommendations</h3>
+          </div>
+          <div class="card-body">
+            <form action="/movies/recommend" method="POST" id="recommendForm">
+              <div class="mb-3">
+                <label for="favoriteMovies" class="form-label"
+                  >Your Favorite Movies</label
+                >
+                <textarea
+                  class="form-control"
+                  id="favoriteMovies"
+                  name="favoriteMovies"
+                  rows="2"
+                  placeholder="e.g., The Godfather, Inception, The Shawshank Redemption"
+                ></textarea>
+                <div class="form-text">
+                  Separate multiple titles with commas
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="genres" class="form-label">Preferred Genres</label>
+                <select class="form-select" id="genres" name="genres" multiple>
+                  <option value="Action">Action</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Animation">Animation</option>
+                  <option value="Biography">Biography</option>
+                  <option value="Comedy">Comedy</option>
+                  <option value="Crime">Crime</option>
+                  <option value="Documentary">Documentary</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Family">Family</option>
+                  <option value="Fantasy">Fantasy</option>
+                  <option value="History">History</option>
+                  <option value="Horror">Horror</option>
+                  <option value="Music">Music</option>
+                  <option value="Mystery">Mystery</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Sci-Fi">Sci-Fi</option>
+                  <option value="Sport">Sport</option>
+                  <option value="Thriller">Thriller</option>
+                  <option value="War">War</option>
+                  <option value="Western">Western</option>
+                </select>
+                <div class="form-text">
+                  Hold Ctrl/Cmd to select multiple genres
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="mood" class="form-label">Your Current Mood</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="mood"
+                  name="mood"
+                  placeholder="e.g., Happy, Thoughtful, Need to relax, Want to be inspired"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-100">
+                Get Recommendations
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Search Section -->
+<section class="my-5">
+  <div class="container text-center">
+    <hr class="mb-5" />
+    <h2>Looking for something specific?</h2>
+    <p class="lead mb-4">Search for movies by title, actors, or directors</p>
+    <a href="/movies/search" class="btn btn-outline-primary btn-lg px-4">
+      <i class="fas fa-search me-2"></i>Search Movies
+    </a>
+  </div>
+</section>

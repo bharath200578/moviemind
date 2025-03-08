@@ -1,0 +1,78 @@
+<!-- Search Header -->
+<div class="bg-light p-5 rounded-lg mb-4">
+  <div class="container">
+    <h1 class="display-5">Search Movies</h1>
+    <p class="lead">
+      Find information on thousands of movies from the Open Movie Database
+    </p>
+  </div>
+</div>
+
+<!-- Search Form -->
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-md-8 mx-auto">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <form action="/movies/search" method="GET" class="d-flex">
+            <input
+              type="text"
+              name="title"
+              class="form-control form-control-lg me-2"
+              placeholder="Enter movie title..."
+              value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>"
+              required
+            />
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search me-1"></i> Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Results -->
+  <div class="row">
+    <% if (typeof message !== 'undefined' && message) { %>
+    <div class="col-12">
+      <div class="alert alert-info"><%= message %></div>
+    </div>
+    <% } %> <% if (typeof movies !== 'undefined' && movies.length > 0) { %> <%
+    movies.forEach(movie => { %>
+    <div class="col-md-4 col-lg-3 mb-4">
+      <div class="card h-100 shadow-sm">
+        <% if (movie.Poster && movie.Poster !== 'N/A') { %>
+        <img
+          src="<%= movie.Poster %>"
+          class="card-img-top"
+          alt="<%= movie.Title %> poster"
+        />
+        <% } else { %>
+        <div class="bg-light text-center py-5">
+          <i class="fas fa-film fa-4x text-muted"></i>
+          <p class="mt-2 text-muted">No poster available</p>
+        </div>
+        <% } %>
+        <div class="card-body">
+          <h5 class="card-title"><%= movie.Title %></h5>
+          <p class="card-text text-muted">
+            <i class="far fa-calendar-alt me-2"></i><%= movie.Year %>
+          </p>
+          <p class="card-text text-muted">
+            <i class="fas fa-film me-2"></i><%= movie.Type %>
+          </p>
+        </div>
+        <div class="card-footer bg-white">
+          <a
+            href="/movies/details/<%= movie.imdbID %>"
+            class="btn btn-primary btn-sm w-100"
+          >
+            View Details
+          </a>
+        </div>
+      </div>
+    </div>
+    <% }) %> <% } %>
+  </div>
+</div>

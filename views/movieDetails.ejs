@@ -1,0 +1,143 @@
+<div class="container py-4">
+  <div class="mb-4">
+    <a href="javascript:history.back()" class="btn btn-outline-secondary">
+      <i class="fas fa-arrow-left me-2"></i>Back
+    </a>
+  </div>
+
+  <div class="row">
+    <!-- Movie Poster -->
+    <div class="col-md-4 mb-4">
+      <% if (movie.Poster && movie.Poster !== 'N/A') { %>
+      <img
+        src="<%= movie.Poster %>"
+        class="img-fluid rounded shadow"
+        alt="<%= movie.Title %> poster"
+      />
+      <% } else { %>
+      <div class="bg-light text-center py-5 rounded shadow">
+        <i class="fas fa-film fa-5x text-muted"></i>
+        <p class="mt-3 text-muted">No poster available</p>
+      </div>
+      <% } %>
+
+      <div class="mt-4">
+        <% if (movie.imdbID) { %>
+        <a
+          href="https://www.imdb.com/title/<%= movie.imdbID %>"
+          target="_blank"
+          class="btn btn-warning w-100 mb-2"
+        >
+          <i class="fab fa-imdb me-2"></i>View on IMDb
+        </a>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Movie Details -->
+    <div class="col-md-8">
+      <h1 class="mb-1"><%= movie.Title %></h1>
+
+      <div class="d-flex flex-wrap align-items-center mb-3">
+        <% if (movie.Year) { %>
+        <span class="badge bg-secondary me-2 mb-1"><%= movie.Year %></span>
+        <% } %> <% if (movie.Rated) { %>
+        <span class="badge bg-dark me-2 mb-1"><%= movie.Rated %></span>
+        <% } %> <% if (movie.Runtime) { %>
+        <span class="badge bg-secondary me-2 mb-1"><%= movie.Runtime %></span>
+        <% } %> <% if (movie.imdbRating && movie.imdbRating !== 'N/A') { %>
+        <span class="badge bg-warning text-dark me-2 mb-1">
+          <i class="fas fa-star me-1"></i><%= movie.imdbRating %>/10
+        </span>
+        <% } %>
+      </div>
+
+      <% if (movie.Genre) { %>
+      <div class="mb-3">
+        <% movie.Genre.split(', ').forEach(genre => { %>
+        <span class="badge bg-primary me-1 mb-1"><%= genre %></span>
+        <% }) %>
+      </div>
+      <% } %> <% if (movie.Plot && movie.Plot !== 'N/A') { %>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Plot</h5>
+        </div>
+        <div class="card-body">
+          <p class="mb-0"><%= movie.Plot %></p>
+        </div>
+      </div>
+      <% } %>
+
+      <div class="row">
+        <% if (movie.Director && movie.Director !== 'N/A') { %>
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <h5 class="mb-0">Director</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><%= movie.Director %></p>
+            </div>
+          </div>
+        </div>
+        <% } %> <% if (movie.Writer && movie.Writer !== 'N/A') { %>
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <h5 class="mb-0">Writer</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><%= movie.Writer %></p>
+            </div>
+          </div>
+        </div>
+        <% } %> <% if (movie.Actors && movie.Actors !== 'N/A') { %>
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <h5 class="mb-0">Cast</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><%= movie.Actors %></p>
+            </div>
+          </div>
+        </div>
+        <% } %> <% if (movie.Awards && movie.Awards !== 'N/A') { %>
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-header">
+              <h5 class="mb-0">Awards</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-0"><%= movie.Awards %></p>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+
+      <% if (movie.Ratings && movie.Ratings.length > 0) { %>
+      <div class="card mt-3">
+        <div class="card-header">
+          <h5 class="mb-0">Ratings</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <% movie.Ratings.forEach(rating => { %>
+            <div class="col-md-4 mb-2">
+              <div class="d-flex flex-column align-items-center">
+                <h6><%= rating.Source %></h6>
+                <span class="badge bg-success fs-5 px-3 py-2"
+                  ><%= rating.Value %></span
+                >
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
